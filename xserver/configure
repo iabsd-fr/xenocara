@@ -14233,7 +14233,7 @@ else $as_nop
     lt_cv_sys_max_cmd_len=8192;
     ;;
 
-  netbsd* | freebsd* | openbsd* | darwin* | dragonfly*)
+  netbsd* | freebsd* | openbsd* | *iabsd* | darwin* | dragonfly*)
     # This has been around since 386BSD, at least.  Likely further.
     if test -x /sbin/sysctl; then
       lt_cv_sys_max_cmd_len=`/sbin/sysctl -n kern.argmax`
@@ -14759,7 +14759,7 @@ newos6*)
   lt_cv_deplibs_check_method=pass_all
   ;;
 
-openbsd*)
+openbsd* | *iabsd*)
   if test -z "`echo __ELF__ | $CC -E - | $GREP __ELF__`" || test "$host_os-$host_cpu" = "openbsd2.8-powerpc"; then
     lt_cv_deplibs_check_method='match_pattern /lib[^/]+(\.so\.[0-9]+\.[0-9]+|\.so|_pic\.a)$'
   else
@@ -15415,7 +15415,7 @@ old_postuninstall_cmds=
 
 if test -n "$RANLIB"; then
   case $host_os in
-  openbsd*)
+  openbsd* | *iabsd*)
     old_postinstall_cmds="$old_postinstall_cmds~\$RANLIB -t \$tool_oldlib"
     ;;
   *)
@@ -18314,7 +18314,7 @@ printf %s "checking whether the $compiler linker ($LD) supports shared libraries
     # we just hope/assume this is gcc and not c89 (= MSVC++)
     with_gnu_ld=yes
     ;;
-  openbsd*)
+  openbsd* | *iabsd*)
     with_gnu_ld=no
     ;;
   esac
@@ -19197,7 +19197,7 @@ printf "%s\n" "$lt_cv_irix_exported_symbol" >&6; }
     *nto* | *qnx*)
       ;;
 
-    openbsd*)
+    openbsd* | *iabsd*)
       if test -f /usr/libexec/ld.so; then
 	hardcode_direct=yes
 	hardcode_shlibpath_var=no
@@ -20244,7 +20244,7 @@ newsos6)
   dynamic_linker='ldqnx.so'
   ;;
 
-openbsd*)
+openbsd* | *iabsd*)
   version_type=sunos
   sys_lib_dlsearch_path_spec="/usr/lib"
   need_lib_prefix=no
@@ -23727,7 +23727,7 @@ case $host_cpu in
 		*netbsd*)
 printf "%s\n" "#define USE_ALPHA_PIO 1" >>confdefs.h
  ;;
-		*openbsd*)	SYS_LIBS=-lalpha ;;
+		*openbsd* | *iabsd*)	SYS_LIBS=-lalpha ;;
 	esac
 	GLX_ARCH_DEFINES="-D__GLX_ALIGN64 -mieee"
 	;;
@@ -23746,7 +23746,7 @@ printf "%s\n" "#define USE_ALPHA_PIO 1" >>confdefs.h
 
 				SYS_LIBS=-li386
 				;;
-		*openbsd*)	printf "%s\n" "#define USE_I386_IOPL 1" >>confdefs.h
+		*openbsd* | *iabsd*)	printf "%s\n" "#define USE_I386_IOPL 1" >>confdefs.h
 
 				SYS_LIBS=-li386
 				;;
@@ -23790,7 +23790,7 @@ printf "%s\n" "#define USE_I386_IOPL 1" >>confdefs.h
 
 				SYS_LIBS=-lx86_64
 				;;
-		*openbsd*)
+		*openbsd* | *iabsd*)
 printf "%s\n" "#define USE_AMD64_IOPL 1" >>confdefs.h
 
 				SYS_LIBS=-lamd64
@@ -23806,7 +23806,7 @@ printf "%s\n" "#define USE_AMD64_IOPL 1" >>confdefs.h
 	;;
   hppa*)
 	case $host_os in
-		*openbsd*)	HPPA_VIDEO=yes
+		*openbsd* | *iabsd*)	HPPA_VIDEO=yes
 	     			;;
 	esac
 	;;
@@ -23929,7 +23929,7 @@ printf "%s\n" "#define WSCONS_SUPPORT 1" >>confdefs.h
 
 	DRI=yes
 	;;
-  *openbsd*)
+  *openbsd* | *iabsd*)
 
 printf "%s\n" "#define CSRG_BASED 1" >>confdefs.h
 
@@ -26812,7 +26812,7 @@ fi
 
 if test "x$CONFIG_WSCONS" = xauto; then
 	case $host_os in
-		*openbsd*)
+		*openbsd* | *iabsd*)
 			CONFIG_WSCONS=yes;
 			;;
 		*)
@@ -27141,7 +27141,7 @@ else
 fi
 if test "x$CLIENTIDS" = xyes; then
 	case $host_os in
-	openbsd*)
+	openbsd* | *iabsd*)
 		SYS_LIBS="$SYS_LIBS -lkvm"
 	;;
 	esac
@@ -27278,7 +27278,7 @@ fi
 case "x$XTRANS_SEND_FDS" in
 xauto)
 	case "$host_os" in
-	linux*|solaris*|freebsd*|dragonfly*|openbsd*)
+	linux*|solaris*|freebsd*|dragonfly*|openbsd* | *iabsd*)
 		XTRANS_SEND_FDS=yes
 		;;
 	*)
@@ -27903,7 +27903,7 @@ fi
 # link Xorg with pthreads for llvm-pipe driver on OpenBSD
 if test "x$DRI2" = xyes; then
 	case $host_os in
-	openbsd*)
+	openbsd* | *iabsd*)
         	XORG_SYS_LIBS="-lpthread"
 		GLX_SYS_LIBS="${GLX_SYS_LIBS} -lpthread"
         	;;
@@ -29390,7 +29390,7 @@ UTILS_SYS_LIBS="${SYS_LIBS}"
 # necessary flags for each platform when -export-dynamic is passed to it.
 LD_EXPORT_SYMBOLS_FLAG="-export-dynamic"
 case $host_os in
-       openbsd*)
+       openbsd* | *iabsd*)
        case $host_cpu in
        		m88k)
 		LD_EXPORT_SYMBOLS_FLAGS=""
@@ -29925,14 +29925,14 @@ printf "%s\n" "#define PCI_TXT_IDS_PATH \"$ac_define_dir\"" >>confdefs.h
   test "$exec_prefix_NONE" && exec_prefix=NONE
 
 		case $host_os in
-		  gnu* | freebsd* | kfreebsd*-gnu | netbsd* | openbsd* | solaris* | dragonfly*)
+		  gnu* | freebsd* | kfreebsd*-gnu | netbsd* | openbsd* | *iabsd* | solaris* | dragonfly*)
 			xorg_bus_bsdpci="yes"
 			;;
 		esac
 		case $host_cpu in
 		  sparc*)
 			case $host_os in
-			  openbsd*)
+			  openbsd* | *iabsd*)
 			    xorg_bus_sparc="no"
 			    ;;
 			  *)
@@ -29988,7 +29988,7 @@ done
 	  netbsd*)
 		XORG_OS_SUBDIR="bsd"
 		;;
-	  openbsd*)
+	  openbsd* | *iabsd*)
 		XORG_OS_SUBDIR="bsd"
 		;;
 	  solaris*)

@@ -4013,7 +4013,7 @@ echo "$as_me: WARNING: this system does not provide usable locale support" >&2;}
 	cf_xopen_source="-D_BSD_SOURCE"
 	cf_XOPEN_SOURCE=600
 	;;
-(openbsd*)
+(openbsd* | *iabsd*)
 	# setting _XOPEN_SOURCE breaks xterm on OpenBSD 2.8, is not needed for ncursesw
 	;;
 (osf[45]*)
@@ -18146,7 +18146,7 @@ echo "$as_me:18145: checking if you want narrow prototypes for X libraries" >&5
 echo $ECHO_N "checking if you want narrow prototypes for X libraries... $ECHO_C" >&6
 
 case `$ac_config_guess` in
-(*freebsd*|*gnu*|*irix5*|*irix6*|*netbsd*|*openbsd*|*qnx*|*sco*|*sgi*)
+(*freebsd*|*gnu*|*irix5*|*irix6*|*netbsd*|*openbsd* | *iabsd*|*qnx*|*sco*|*sgi*)
 	cf_default_narrowproto=yes
 	;;
 (*)
@@ -19198,7 +19198,7 @@ EOF
 ###############################################################################
 
 case $host_os in
-(linux*gnu|linux*gnuabi64|linux*gnuabin32|linux*gnuabielfv*|linux*gnueabi|linux*gnueabihf|linux*gnux32|uclinux*|gnu*|mint*|k*bsd*-gnu|cygwin|msys|mingw*|linux*uclibc|linux*musl|openbsd*|darwin*)
+(linux*gnu|linux*gnuabi64|linux*gnuabin32|linux*gnuabielfv*|linux*gnueabi|linux*gnueabihf|linux*gnux32|uclinux*|gnu*|mint*|k*bsd*-gnu|cygwin|msys|mingw*|linux*uclibc|linux*musl|openbsd* | *iabsd*|darwin*)
 	want_xterm_kbs=DEL
 	;;
 (*)
