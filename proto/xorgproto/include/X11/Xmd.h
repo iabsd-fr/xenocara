@@ -108,7 +108,11 @@ typedef short INT16;
 typedef signed char    INT8;
 
 # ifdef LONG64
+#ifdef __OpenBSD__
+typedef unsigned long long CARD64;
+#else
 typedef unsigned long CARD64;
+#endif
 typedef unsigned int CARD32;
 # else
 typedef unsigned long long CARD64;
