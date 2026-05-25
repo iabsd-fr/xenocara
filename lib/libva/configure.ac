@@ -27,7 +27,7 @@
 # - reset micro version to zero when minor version is incremented
 # - reset minor version to zero when major version is incremented
 m4_define([va_api_major_version], [1])
-m4_define([va_api_minor_version], [22])
+m4_define([va_api_minor_version], [23])
 m4_define([va_api_micro_version], [0])
 
 m4_define([va_api_version],
@@ -82,12 +82,8 @@ m4_define([libdrm_version], [2.4.75])
 # 1.11.0 for wl_proxy_create_wrapper
 m4_define([wayland_api_version], [1.11.0])
 
-AC_PREREQ(2.57)
-AC_INIT([libva],
-        [libva_version],
-        [https://github.com/intel/libva/issues/new],
-        [libva],
-        [https://github.com/intel/libva])
+AC_PREREQ([2.71])
+AC_INIT([libva],[libva_version],[https://github.com/intel/libva/issues/new],[libva],[https://github.com/intel/libva])
 
 AC_CONFIG_SRCDIR([Makefile.am])
 AC_CONFIG_MACRO_DIR([m4])
@@ -125,33 +121,27 @@ AC_SUBST(LIBVA_LT_VERSION)
 AC_SUBST(LIBVA_LT_LDFLAGS)
 
 AC_ARG_ENABLE(docs,
-    [AC_HELP_STRING([--enable-docs],
-                    [build Doxygen documentation @<:@default=no@:>@])],
+    [AS_HELP_STRING([--enable-docs],[build Doxygen documentation @<:@default=no@:>@])],
     [], [enable_docs="no"])
 
 AC_ARG_ENABLE(drm,
-    [AC_HELP_STRING([--enable-drm],
-                    [build with VA/DRM API support @<:@default=yes@:>@])],
+    [AS_HELP_STRING([--enable-drm],[build with VA/DRM API support @<:@default=yes@:>@])],
     [], [enable_drm="yes"])
 
 AC_ARG_ENABLE(x11,
-    [AC_HELP_STRING([--enable-x11],
-                    [build with VA/X11 API support @<:@default=auto@:>@])],
+    [AS_HELP_STRING([--enable-x11],[build with VA/X11 API support @<:@default=auto@:>@])],
     [], [enable_x11="auto"])
 
 AC_ARG_ENABLE(glx,
-    [AC_HELP_STRING([--enable-glx],
-                    [build with VA/GLX API support @<:@default=auto@:>@])],
+    [AS_HELP_STRING([--enable-glx],[build with VA/GLX API support @<:@default=auto@:>@])],
     [], [enable_glx="auto"])
 
 AC_ARG_ENABLE([wayland],
-    [AC_HELP_STRING([--enable-wayland],
-                    [build with VA/Wayland API support @<:@default=auto@:>@])],
+    [AS_HELP_STRING([--enable-wayland],[build with VA/Wayland API support @<:@default=auto@:>@])],
     [], [enable_wayland="auto"])
 
 AC_ARG_WITH(legacy,
-    [AC_HELP_STRING([--with-legacy=[[components]]],
-                    [build with legacy components @<:@default=emgd,nvctrl,fglrx@:>@])],
+    [AS_HELP_STRING([--with-legacy=[[components]]],[build with legacy components @<:@default=emgd,nvctrl,fglrx@:>@])],
     [], [with_legacy="emgd,nvctrl,fglrx"])
 
 if test "$with_legacy" = *emgd*; then
@@ -165,22 +155,29 @@ if test "$with_legacy" = *fglrx*; then
 fi
 
 AC_ARG_WITH(drivers-path,
-    [AC_HELP_STRING([--with-drivers-path=[[path]]],
-                    [drivers path])],
+    [AS_HELP_STRING([--with-drivers-path=[[path]]],[drivers path])],
     [], [with_drivers_path="$libdir/dri"])
 
 LIBVA_DRIVERS_PATH="$with_drivers_path"
 AC_SUBST(LIBVA_DRIVERS_PATH)
 
 AC_DISABLE_STATIC
-AC_PROG_LIBTOOL
+LT_INIT
 AC_PROG_CC
 AC_PROG_CXX
 AM_PROG_CC_C_O
 AC_PROG_SED
 PKG_PROG_PKG_CONFIG
 
-AC_HEADER_STDC
+m4_warn([obsolete],
+[The preprocessor macro `STDC_HEADERS' is obsolete.
+  Except in unusual embedded environments, you can safely include all
+  ISO C90 headers unconditionally.])dnl
+# Autoupdate added the next two lines to ensure that your configure
+# script's behavior did not change.  They are probably safe to remove.
+AC_CHECK_INCLUDES_DEFAULT
+AC_PROG_EGREP
+
 AC_SYS_LARGEFILE
 
 #check for secure_getenv
@@ -337,7 +334,7 @@ if test "$USE_DRM:$USE_X11:$USE_WAYLAND" = "no:no:no"; then
     AC_MSG_ERROR([Please select at least one backend (DRM, X11, Wayland)])
 fi
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
     Makefile
     doc/Makefile
     pkgconfig/Makefile
@@ -353,6 +350,7 @@ AC_OUTPUT([
     va/wayland/Makefile
     va/x11/Makefile
 ])
+AC_OUTPUT
 
 # Print a small summary
 BACKENDS=""
@@ -370,3 +368,5 @@ echo Extra window systems ............. : $BACKENDS
 echo Build with legacy ................ : $with_legacy
 echo Build documentation .............. : $enable_docs
 echo
+m4_unquote(
+  _m4_defn([_m4_wrap_text])_m4_popdef([_m4_wrap_text]))
