@@ -290,11 +290,11 @@
 ./usr/X11R6/lib/libglapi.a
 ./usr/X11R6/lib/libglapi.so.2.0
 ./usr/X11R6/lib/libva-drm.la
-./usr/X11R6/lib/libva-drm.so.2.22
+./usr/X11R6/lib/libva-drm.so.2.23
 ./usr/X11R6/lib/libva-x11.la
-./usr/X11R6/lib/libva-x11.so.2.22
+./usr/X11R6/lib/libva-x11.so.2.23
 ./usr/X11R6/lib/libva.la
-./usr/X11R6/lib/libva.so.2.22
+./usr/X11R6/lib/libva.so.2.23
 ./usr/X11R6/lib/libxshmfence.a
 ./usr/X11R6/lib/libxshmfence.la
 ./usr/X11R6/lib/libxshmfence.so.0.0
