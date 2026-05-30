@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.3 2025/11/09 15:54:47 matthieu Exp $
+# $OpenBSD: Makefile,v 1.4 2026/05/30 10:15:23 naddy Exp $
 
 .include <bsd.own.mk>
 
@@ -53,12 +53,8 @@ CFLAGS += -std=gnu99 -fno-strict-aliasing -fvisibility=hidden -ftrapping-math \
 
 .if ${MACHINE_ARCH} == "amd64" || ${MACHINE_ARCH} == "i386"
 SRCS += \
-  pixman-mmx.c \
   pixman-sse2.c \
   pixman-ssse3.c
-
-CFLAGS_pixman-mmx.so = -mmmx
-CFLAGS_pixman-mmx.o = -mmmx
 
 CFLAGS_pixman-sse2.so = -msse2
 CFLAGS_pixman-sse2.o = -msse2
